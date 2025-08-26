@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background dark:bg-dark-background text-foreground dark:text-dark-foreground;
+  font-family: 'Inter', sans-serif;
+  background-size: 200% 200%;
+  animation: gradient-pan 25s ease infinite;
+}
+
+.light body {
+  background-image: linear-gradient(135deg, hsl(210, 60%, 98%) 0%, hsl(220, 60%, 96%) 50%, hsl(200, 60%, 97%) 100%);
+}
+
+.dark body {
+  background-image: linear-gradient(135deg, hsl(222, 47%, 12%) 0%, hsl(230, 40%, 15%) 50%, hsl(222, 47%, 12%) 100%);
+}
+
+::selection {
+  @apply bg-primary/20 text-primary dark:bg-dark-primary/30 dark:text-dark-primary;
+}
+
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient-pan {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.animate-scaleIn {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+.animate-fadeInContent {
+    animation: fadeInContent 0.3s ease-in forwards;
+}
+.ease-out-cubic {
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+}

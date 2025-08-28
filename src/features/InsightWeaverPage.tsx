@@ -278,4 +278,47 @@ Ensure the JSON is well-formed. Do not include any introductory or concluding te
             </div>
             {analysis.contrastingViewpoints && analysis.contrastingViewpoints.length > 0 && (
               <div>
-                <h3 className="text-xl font-semibold mb-
+                <h3 className="text-xl font-semibold mb-1.5 text-foreground dark:text-dark-foreground">Contrasting Viewpoints</h3>
+                {renderList(analysis.contrastingViewpoints, "No contrasting viewpoints highlighted.")}
+              </div>
+            )}
+            <div>
+              <h3 className="text-xl font-semibold mb-1.5 text-foreground dark:text-dark-foreground">Common Methodologies</h3>
+              {renderList(analysis.commonMethodologies, "Not specified.")}
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-1.5 text-foreground dark:text-dark-foreground">Identified Research Gaps</h3>
+              {renderListWithButtons(analysis.identifiedGaps, 'gap', "No research gaps identified.")}
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-1.5 text-foreground dark:text-dark-foreground">Suggested Future Research</h3>
+              {renderList(analysis.futureDirections, "None suggested.")}
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Key Sources</h3>
+              {sources && sources.length > 0 ? (
+                <ul className="list-disc list-inside text-sm text-muted-foreground dark:text-dark-muted-foreground space-y-1">
+                  {sources.map((s, i) => (
+                    <li key={i}>{(s.web && s.web.title) || (s.retrievedContext && s.retrievedContext.title) || s.web?.uri || 'Source'}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-muted-foreground dark:text-dark-muted-foreground">No specific web sources were cited by the AI for this synthesis.</p>
+              )}
+            </div>
+            <div className="pt-2 flex justify-end">
+               <div className="flex items-center gap-1">
+                  <span className="text-xs text-muted-foreground dark:text-dark-muted-foreground mr-1">Helpful?</span>
+                  <Button variant="ghost" size="sm" onClick={() => { addToast('Feedback recorded (mock).', 'info');}} className="p-1 text-muted-foreground hover:text-primary">👍</Button>
+                  <Button variant="ghost" size="sm" onClick={() => { addToast('Feedback recorded (mock).', 'info');}} className="p-1 text-muted-foreground hover:text-destructive">👎</Button>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+    </div>
+  </div>
+  );
+}
+
+// single default export is declared at function definition

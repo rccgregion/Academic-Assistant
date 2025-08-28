@@ -6,10 +6,11 @@ let ai: GoogleGenAI | null = null;
 
 const getAIInstance = () => {
   if (!ai) {
-    if (!process.env.API_KEY) {
+    const apiKey = import.meta.env.VITE_API_KEY;
+    if (!apiKey) {
       throw new Error("API_KEY is not defined in the environment.");
     }
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    ai = new GoogleGenAI({ apiKey });
   }
   return ai;
 };
@@ -121,10 +122,10 @@ export const generateText = async (
     });
 
     const response: GenerateContentResponse = await makeApiCallWithRetry(apiCall);
-    const text = response.text;
-    const sources = response.candidates?.[0]?.groundingMetadata?.groundingChunks as GroundingChunk[] | undefined;
+  const text = response.text ?? "";
+  const sources = response.candidates?.[0]?.groundingMetadata?.groundingChunks as GroundingChunk[] | undefined;
     
-    return { text, sources };
+  return { text, sources };
 
   } catch (error: any) {
     return { text: "", error: error.message || DEFAULT_ERROR_MESSAGE };
@@ -201,9 +202,9 @@ export const sendMessageInChat = async (chat: Chat, message: string): Promise<Ge
   try {
     const apiCall = () => chat.sendMessage({ message });
     const response: GenerateContentResponse = await makeApiCallWithRetry(apiCall);
-    const text = response.text;
-    const sources = response.candidates?.[0]?.groundingMetadata?.groundingChunks as GroundingChunk[] | undefined;
-    return { text, sources };
+  const text = response.text ?? "";
+  const sources = response.candidates?.[0]?.groundingMetadata?.groundingChunks as GroundingChunk[] | undefined;
+  return { text, sources };
   } catch (error: any) {
     return { text: "", error: error.message || DEFAULT_ERROR_MESSAGE };
   }
@@ -271,7 +272,7 @@ export const generateDiagramImage = async (
       config: { numberOfImages: 1, outputMimeType: 'image/jpeg' }, 
     }));
 
-    if (response.generatedImages && response.generatedImages.length > 0) {
+    if (response.generatedImages && response.generatedImages.length > 0 && response.generatedImages[0]?.image?.imageBytes) {
       const base64ImageBytes = response.generatedImages[0].image.imageBytes;
       return { base64Image: base64ImageBytes };
     } else {

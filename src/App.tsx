@@ -112,7 +112,8 @@ const AppContent: React.FC = () => {
       <ToastContainer />
       <SaveToDriveModal />
 
-      <div className="fixed top-4 right-4 z-50 flex items-center space-x-2">
+      {/* Floating controls: mobile-only to avoid overlapping with navbar profile on larger screens */}
+      <div className="fixed top-4 right-4 z-50 flex items-center space-x-2 md:hidden">
         <LanguageSelectorButton />
         <ThemeToggleButton />
       </div>

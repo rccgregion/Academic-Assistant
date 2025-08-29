@@ -7,10 +7,9 @@ const FlagYoIcon: React.FC<{ className?: string }> = ({ className = "h-4 w-4" })
       viewBox="0 0 60 30" 
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="60" height="30" fill="#008751"/>
-      <rect width="60" height="20" y="5" fill="#FFFFFF"/>
-      <rect width="60" height="10" y="10" fill="#008751"/>
-      <rect width="20" height="30" fill="#C8102E"/>
+      <rect width="20" height="30" fill="#008751"/>
+      <rect x="20" width="20" height="30" fill="#FFFFFF"/>
+      <rect x="40" width="20" height="30" fill="#008751"/>
     </svg>
   );
 };

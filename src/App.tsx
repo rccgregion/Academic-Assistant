@@ -55,11 +55,18 @@ const MainAppLayout: React.FC = () => {
 
   return (
     <>
-      <MobileHeader onMenuClick={toggleMobileSidebar} appName={t('appName')} />
+      {/* Mobile Header - only shown on mobile */}
+      <div className="md:hidden">
+        <MobileHeader onMenuClick={toggleMobileSidebar} appName={t('appName')} />
+      </div>
+      
       <div className="flex h-screen pt-14 md:pt-0 bg-transparent">
         <Sidebar isMobileOpen={isMobileSidebarOpen} closeMobileSidebar={closeMobileSidebar} />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <Navbar />
+          {/* Desktop Navbar - only shown on desktop */}
+          <div className="hidden md:block">
+            <Navbar />
+          </div>
           <main
             className={`flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-6 space-y-6 bg-transparent transition-opacity duration-300 ease-out ${isPageLoading ? 'opacity-0' : 'opacity-100 animate-fadeInContent'}`}
             key={location.pathname}
@@ -85,7 +92,10 @@ const HomePageLayout: React.FC = () => {
 
   return (
     <>
-      <Navbar />
+      {/* Navbar for homepage - hidden on mobile to avoid duplication with mobile header */}
+      <div className="hidden md:block">
+        <Navbar />
+      </div>
       <main className={`transition-opacity duration-300 ease-out ${isPageLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Outlet />
       </main>

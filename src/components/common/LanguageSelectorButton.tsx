@@ -76,11 +76,11 @@ const LanguageSelectorButton: React.FC<{ className?: string }> = ({ className })
         className="p-2 rounded-full shadow-md hover:shadow-lg transition-all text-muted-foreground hover:text-primary dark:text-dark-muted-foreground dark:hover:text-dark-primary"
         title={t('settings.languageLabel')}
       >
-        <div className="flex items-center space-x-1.5">
-          <CurrentFlagIcon className="h-4 w-4" />
-          <GlobeIcon className="h-4 w-4" />
-          <span className="text-xs font-medium">{currentLangLabel}</span> 
-          <ChevronDownIcon className={`h-3 w-3 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <div className="flex items-center space-x-1.5 min-w-0">
+          <CurrentFlagIcon className="h-4 w-4 flex-shrink-0" />
+          <GlobeIcon className="h-4 w-4 flex-shrink-0" />
+          <span className="text-xs font-medium max-w-[5rem] truncate flex-shrink" title={currentLangLabel}>{currentLangLabel}</span> 
+          <ChevronDownIcon className={`h-3 w-3 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </Button>
 

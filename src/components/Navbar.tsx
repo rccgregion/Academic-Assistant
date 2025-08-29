@@ -20,12 +20,14 @@ const Navbar: React.FC = () => {
       <div className="flex items-center space-x-3">
         <LanguageSelectorButton />
         <ThemeToggleButton />
-        <button className="profile-btn group" title="Profile Settings">
-          <span className="sr-only">Open profile</span>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm text-white bg-gradient-to-br from-primary to-secondary shadow-md group-hover:shadow-lg transition-all duration-200 transform group-hover:scale-105">
-            {/* Removed S */}
-          </div>
-        </button>
+        {location.pathname === '/dashboard' && (
+          <button className="profile-btn group" title="Profile Settings">
+            <span className="sr-only">Open profile</span>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm text-white bg-gradient-to-br from-primary to-secondary shadow-md group-hover:shadow-lg transition-all duration-200 transform group-hover:scale-105">
+              {/* Removed S */}
+            </div>
+          </button>
+        )}
       </div>
     </nav>
   );

@@ -41,7 +41,7 @@ const SaveToDriveModal: React.FC = () => {
   useEffect(() => {
     if (isSaveModalOpen && dataUri && currentFilenameToSave && gdriveButtonTargetRef.current) {
       if (window.gapi && window.gapi.savetodrive) {
-        gdriveButtonTargetRef.current.innerHTML = ''; 
+      gdriveButtonTargetRef.current.replaceChildren();
         try {
             window.gapi.savetodrive.render(gdriveButtonTargetRef.current, {
                 src: dataUri,
